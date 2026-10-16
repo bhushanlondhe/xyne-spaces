@@ -1,0 +1,17 @@
+# VictoriaMetrics Scrape Configuration
+# Built-in scraper (replaces vmagent)
+
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'vespa-data-ingest'
+    scrape_interval: 10s
+    metrics_path: /prometheus/v1/values
+    params:
+      consumer: ['vespa']
+    static_configs:
+      - targets: ['10.0.0.27:8080', '10.0.0.27:8081']
+        labels:
+          env: 'development'
+          service: 'vespa'
